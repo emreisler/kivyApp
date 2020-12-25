@@ -27,7 +27,7 @@ class LoginScreen(GridLayout):
         self.dis8 = ToggleButton(text="Tension")
         self.dis9 = ToggleButton(text="Tubercular")
         self.dis10 = ToggleButton(text="Flu")
-
+        self.infoLabel = Label(text="Hello")
 
         self.add_widget(self.dis1)
         self.add_widget(self.dis2)
@@ -39,6 +39,7 @@ class LoginScreen(GridLayout):
         self.add_widget(self.dis8)
         self.add_widget(self.dis9)
         self.add_widget(self.dis10)
+        self.add_widget(self.infoLabel)
 
         self.dis1.bind(on_press=self.dis1Action)
         self.dis2.bind(on_press=self.dis2Action)
@@ -148,8 +149,9 @@ class LoginScreen(GridLayout):
 
             x = urllib.request.urlopen(f'http://firla-277516.ey.r.appspot.com/?dis={self.disiase}&meas1={self.dataSet["meas1"]}&'
                                        f'meas2={self.dataSet["meas2"]}&meas3={self.dataSet["meas3"]}&meas4={self.dataSet["meas4"]}&meas5={self.dataSet["meas5"]}')
-
-            print(x.read())
+            values = str(x.read())
+            self.infoLabel.text = values
+            print(values)
             time.sleep(0.5)
 
     def getDataFromArdunio(self):
